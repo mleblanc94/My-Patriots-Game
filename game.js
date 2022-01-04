@@ -13,18 +13,17 @@ let currentJumpForce = jumpForce;
 let isJumping = true;
 const fallDeath = 600;
 
-loadSprite('chris-facing-right', 'Hansen-facing-right.png')
-loadSprite('chris-facing-left', 'Hansen-facing-left.png')
-loadSprite('lorne','Lorne.png')
-loadSprite('lorne-afterDefeat', 'lorneArmstrong-afterDefeat.png')
+loadSprite('mac-facing-right', 'mac-facing-right.png')
+loadSprite('mac-facing-left', 'mac-facing-left.png')
+loadSprite('mahomes','mahomes.png')
+loadSprite('allen','allen.png')
 loadSprite('brick', 'brick.png')
 loadSprite('block', 'block.png')
 loadSprite('coin', 'coin.png')
-loadSprite('MikesHard', 'MikesHard.png')
+loadSprite('water', 'waterBottle.png')
 loadSprite('surprise', 'mystery.png')
 loadSprite('pipe', 'pipe.png')
 loadSprite('unboxed', 'unboxed.png')
-loadSprite('jeffSokol', 'jeffSokol.png')
 loadSprite('stopper', 'blackScreen.jpg')
 
 scene("game", ({level, score}) => {
@@ -36,9 +35,9 @@ scene("game", ({level, score}) => {
         '                                                                                      ',
         '                  %%                                                                  ',
         '                                                                                      ',
-        ' #    $$       =====   t  - t  t    a    -    t                        t   -    t{    ',
-        '=======     =========   ====    ==============      ========            ==============',
-        '                                                                                      ',
+        ' #   $$       =====    t  -   t  t a    -       t                      t   -    t{    ',
+        '=======     =========    =====    ==============      ========          ==============',
+        '                                                                     =                ',
         '                                                                   =                  ',
        ],
        [
@@ -70,13 +69,12 @@ scene("game", ({level, score}) => {
         't': [sprite('stopper'), scale(0.5), 'end'],
         '$': [sprite('coin'), scale(1.5), 'coin'],
         '%': [sprite('surprise'), solid(), 'coin-surprise'],
-        '*': [sprite('surprise'), solid(), 'MikesHard-surprise'],
+        '*': [sprite('surprise'), solid(), 'water-surprise'],
         '}': [sprite('unboxed'), solid()],
         '{': [sprite('pipe'), solid(), scale(1.2), 'pipe'],
-        '@': [sprite('MikesHard'), scale(0.08), 'MikesHard'],
-        '-': [sprite('lorne'), solid(), scale(0.16), { dir: -1 }, 'dangerous'],
-        'y': [sprite('lorne-afterDefeat'), scale(2)],
-        'a': [sprite('jeffSokol'), solid(), scale(0.09), { dir: -1 }, 'dangerous']
+        '@': [sprite('water'), scale(0.04), 'water'],
+        '-': [sprite('mahomes'), solid(), scale(0.11), { dir: -1 }, 'dangerous'],
+        'a': [sprite('allen'), solid(), scale(0.09), { dir: -1 }, 'dangerous']
     }
 
     const gameLevel = addLevel(maps[level], levelCfg)
@@ -92,7 +90,7 @@ scene("game", ({level, score}) => {
 
     add([text('level ' + parseInt(level + 1)), pos(70,6)])
 
-    add([text('Welcome to the Predator Dungeon'), pos(500,60)])
+    add([text("Welcome to Mike's Game"), pos(500,60)])
 
     function big() {
         let timer = 0;
@@ -125,7 +123,7 @@ scene("game", ({level, score}) => {
     }
 
     const player = add([
-        sprite('chris-facing-right'),solid(), scale(0.1), 
+        sprite('mac-facing-right'),solid(), scale(0.1), 
         pos(30, 0),
         body(),
         big(),
@@ -138,14 +136,14 @@ scene("game", ({level, score}) => {
             destroy(obj)
             gameLevel.spawn('}', obj.gridPos.sub(0,0))
         }
-        if (obj.is('MikesHard-surprise')) {
-            gameLevel.spawn('@', obj.gridPos.sub(-0.1, 1.1))
+        if (obj.is('water-surprise')) {
+            gameLevel.spawn('@', obj.gridPos.sub(-0.2, 0.7))
             destroy(obj)
             gameLevel.spawn('}', obj.gridPos.sub(0,0))
         }
     })
 
-    player.collides('MikesHard', (m) => {
+    player.collides('water', (m) => {
         destroy(m)
         player.biggify(6)
     })
@@ -191,12 +189,12 @@ scene("game", ({level, score}) => {
     })
 
     keyDown('left', () => {
-        player.changeSprite('chris-facing-left')
+        player.changeSprite('mac-facing-left')
         player.move(-moveSpeed, 0)
     })
 
     keyDown('right', () => {
-        player.changeSprite('chris-facing-right')
+        player.changeSprite('mac-facing-right')
         player.move(moveSpeed, 0)
     })
 
