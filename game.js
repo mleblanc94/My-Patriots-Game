@@ -34,7 +34,7 @@ scene("game", ({level, score}) => {
         '                                                                                      ',
         '                                                                                      ',
         '                  %%                                                                  ',
-        '                                                                                      ',
+        '    *                                                                                  ',
         ' #   $$       =====    t  -   t  t a    -       t                      t   -    t{    ',
         '=======     =========    =====    ==============      ========          ==============',
         '                                                                     =                ',
@@ -47,7 +47,7 @@ scene("game", ({level, score}) => {
         '                                                   =       =                           ',
         '                                                  =        =      -                    ',
         '                %%%%*                        ==  =         =                           ',
-        ' #    $$   t -       t        t    -   t                   =   -     t     -       t{  ',
+        ' #    $$   t -       t        t    -   t   t        -      =t        t     -       t{  ',
         '=======     =========   ====   ========     ================          =================',
        ],
        [
@@ -90,7 +90,7 @@ scene("game", ({level, score}) => {
 
     add([text('level ' + parseInt(level + 1)), pos(70,6)])
 
-    add([text("Welcome to Mike's Game"), pos(500,60)])
+    add([text("Welcome to Mike's Mario/Football Game"), pos(500,60)])
 
     function big() {
         let timer = 0;
